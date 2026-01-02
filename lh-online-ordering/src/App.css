@@ -16,3 +16,9 @@ h1 {
   font-family: "Nothing You Could Do", cursive;
   font-size: 5rem;
 }
+
+h2 {
+  font-size: var(--text-4xl); /* 2.25rem (36px) */
+  line-height: var(--text-4xl--line-height);
+  margin-bottom: calc(var(--spacing) * 10);
+}

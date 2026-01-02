@@ -1,0 +1,32 @@
+import customArrangementImage from "../assets/custom-arrangement.JPG";
+
+function CustomArrangementSectionComponent() {
+  return (
+    <section className="py-30 bg-[#7c8a6e] text-white">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
+        <div className="h-130 bg-neutral-300 flex items-center justify-center rounded">
+          <img
+            src={customArrangementImage}
+            alt="flower bouquet image"
+            className="w-full h-full object-cover rounded"
+          />
+        </div>
+        <div>
+          <h2>Custom Arrangements</h2>
+          <p className="text-sm leading-relaxed mb-6">
+            We'd love to create a personalized dried-flower arrangement just for
+            you. Each design is unique and crafted based on your chosen color
+            palette or inspiration photos. Final pricing will depend on the
+            flower varieties and arrangement size, depending on stock
+            availability.
+          </p>
+          <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-emerald-800 transition">
+            Custom order process
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default CustomArrangementSectionComponent;
