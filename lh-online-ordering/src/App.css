@@ -22,3 +22,8 @@ h2 {
   line-height: var(--text-4xl--line-height);
   margin-bottom: calc(var(--spacing) * 10);
 }
+
+h3 {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+}

@@ -11,19 +11,34 @@ function CollectionsSectionComponent() {
   ];
 
   return (
-    <section className="py-20 bg-neutral-50 text-center">
-      <h2 className="mb-10">Our Collections</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-40 max-w-5xl mx-auto px-6">
+    <section className="bg-neutral-50 py-24 text-center">
+      <h2 className="mb-14 text-3xl font-medium text-neutral-800">
+        Our Collections
+      </h2>
+
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-24 px-6 md:grid-cols-3">
         {collections.map((item) => (
-          <div key={item.name} className="flex flex-col items-center">
-            <div className="w-70 h-86 mb-4">
+          <div
+            key={item.name}
+            className="group flex cursor-pointer flex-col items-center"
+          >
+            {/* Image wrapper */}
+            <div className="relative mb-6 h-86 w-70 overflow-hidden">
+              {/* Image */}
               <img
                 src={item.imageUrl}
                 alt={item.name}
-                className="w-full h-full object-cover rounded"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </div>
-            <p className="uppercase tracking-wide text-sm">{item.name}</p>
+
+            {/* Text */}
+            <p className="text-[13px] font-medium tracking-widest uppercase text-neutral-800">
+              {item.name}
+            </p>
           </div>
         ))}
       </div>

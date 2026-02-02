@@ -4,23 +4,36 @@ import HomePage from "./pages/home-page";
 import ShopPage from "./pages/shop-page";
 import CustomizePage from "./pages/Customize-page";
 import FaqPage from "./pages/Faq-page";
+import RootLayout from "./root";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/shop",
-    element: <ShopPage />,
-  },
-  {
-    path: "/customize",
-    element: <CustomizePage />,
-  },
-  {
-    path: "/FAQ",
-    element: <FaqPage />,
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/shop",
+        element: <ShopPage />,
+        errorElement: <
+        children: [
+          {
+            // to add children
+          }
+        ]
+      },
+      {
+        path: "/customize",
+        element: <CustomizePage />,
+      },
+      {
+        path: "/FAQ",
+        element: <FaqPage />,
+      },
+    ],
   },
 ]);
 

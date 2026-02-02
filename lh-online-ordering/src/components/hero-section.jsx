@@ -17,7 +17,7 @@ function HeroSectionComponent() {
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Navigation links */}
-      <nav className="absolute top-5 left-1/2 transform -translate-x-1/2 w-full flex justify-center py-6 z-20">
+      <nav className="absolute text-white top-5 left-1/2 transform -translate-x-1/2 w-full flex justify-center py-6 z-20">
         <NavItemsComponent />
       </nav>
 

@@ -1,22 +1,43 @@
 import FooterComponent from "../components/footer";
 import HeaderComponent from "../components/header";
 
-const collections = [
+const productCollection = [
   {
-    title: "Same-Day Delivery",
-    image: "/images/same-day.jpg",
-  },
-  {
-    title: "Bouquets",
-    image: "/images/bouquets.jpg",
-  },
-  {
-    title: "Flower Domes",
-    image: "/images/domess.jpg",
+    title: "Flower Bouquets",
+    products: [
+      {
+        title: "LYRA",
+        price: 800,
+      },
+      {
+        title: "JANE",
+        price: 800,
+      },
+      {
+        title: "THEA",
+        price: 800,
+      },
+      {
+        title: "OLIVETTE",
+        price: 800,
+      },
+      {
+        title: "INES",
+        price: 800,
+      },
+      {
+        title: "NOEMI",
+        price: 800,
+      },
+      {
+        title: "NYRA",
+        price: 800,
+      },
+    ],
   },
 ];
 
-function ShopPage() {
+function ProductsPage() {
   return (
     <div>
       <HeaderComponent />
@@ -24,7 +45,7 @@ function ShopPage() {
       <section className="bg-neutral-50 py-24">
         {/* Title */}
         <h2 className="mb-14 text-center text-3xl font-medium text-neutral-800">
-          Collections
+          {products.title}
         </h2>
 
         {/* Grid */}
@@ -60,4 +81,4 @@ function ShopPage() {
   );
 }
 
-export default ShopPage;
+export default ProductsPage;

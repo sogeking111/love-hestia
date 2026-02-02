@@ -3,8 +3,16 @@ import CustomArrangementSectionComponent from "../components/custom-arrangements
 import FooterComponent from "../components/footer";
 import HeroSectionComponent from "../components/hero-section";
 import OurStorySectionComponent from "../components/our-story-section";
+import workshopImage from "../assets/workshop-image.jpg";
+import floristForADay1 from "../assets/florist-for-a-day1.jpg";
+import floristForADay2 from "../assets/florist-for-a-day2.JPG";
 
 function HomePage() {
+  const floristForADayImages = [
+    { imgUrl: floristForADay1 },
+    { imgUrl: floristForADay2 },
+  ];
+
   return (
     <div className="text-neutral-700 bg-neutral-50">
       {/* HERO SECTION */}
@@ -20,14 +28,19 @@ function HomePage() {
       <OurStorySectionComponent />
 
       {/* WORKSHOP */}
-      <section className="relative py-24 bg-neutral-400 text-white text-center">
+      <section className="relative py-60 bg-[#d8cbb5] text-white text-center">
         <div className="absolute inset-0 flex items-center justify-center">
-          Workshop Image Placeholder
+          <img
+            src={workshopImage}
+            alt="Workshop Image"
+            className="w-full h-full object-cover rounded"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
         <div className="relative z-10">
-          <h3 className="text-3xl mb-2">Private Dried Flower Workshop</h3>
+          <p className="text-5xl mb-3">Private Dried Flower Workshop</p>
           <p className="mb-4 text-sm">Birthdays · Bridal Shower · Events</p>
-          <button className="border px-6 py-2 rounded-full text-sm hover:bg-white hover:text-neutral-700 transition">
+          <button className="border px-6 py-2 rounded-full text-sm hover:bg-white hover:text-neutral-700 transition hover:cursor-pointer">
             Learn more
           </button>
         </div>
@@ -35,20 +48,24 @@ function HomePage() {
 
       {/* FLORIST FOR A DAY */}
       <section className="py-20 bg-neutral-50 text-center">
-        <h3 className="text-2xl mb-4">Florist for a Day</h3>
+        <h1 className="mb-4">Florist for a Day</h1>
 
-        <p className="italic text-sm mb-10 max-w-2xl mx-auto">
+        <p className="italic text-lg mb-10 max-w-2xl mx-auto">
           "There's no wrong way to make a bouquet. If it makes you smile, that's
           all the magic you need."
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto px-6">
-          {[1, 2].map((i) => (
+        <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6">
+          {floristForADayImages.map((i) => (
             <div
               key={i}
-              className="h-64 bg-neutral-300 flex items-center justify-center"
+              className="h-80 bg-neutral-300 flex items-center justify-center"
             >
-              Image Placeholder
+              <img
+                src={i.imgUrl}
+                alt="Workshop Image"
+                className="w-full h-full object-cover rounded"
+              />
             </div>
           ))}
         </div>
