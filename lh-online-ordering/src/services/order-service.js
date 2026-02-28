@@ -76,7 +76,6 @@ export const orderService = {
 
     const res = await api.post("/customer-order", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
