@@ -24,11 +24,6 @@ function ProductsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cached = localStorage.getItem(STORAGE_KEY);
-
-    setProducts(JSON.parse(cached));
-    setLoading(false);
-
     productService
       .getAll()
       .then((data) => {
