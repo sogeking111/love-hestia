@@ -5,7 +5,7 @@ import HeroSectionComponent from "../components/hero-section";
 import OurStorySectionComponent from "../components/our-story-section";
 import workshopImage from "../assets/workshop-image.jpg";
 import floristForADay1 from "../assets/florist-for-a-day1.jpg";
-import floristForADay2 from "../assets/florist2-op.JPG";
+import floristForADay2 from "../assets/florist2-op.jpg";
 import { Link } from "react-router-dom";
 
 function HomePage() {
