@@ -1,4 +1,4 @@
-import flowerBouquetImage from "../assets/flower-bouquets.jpg";
+import flowerBouquetImage from "../assets/flower-bouquets.JPG";
 import vaseAndBasketImage from "../assets/vase-and-basket.JPG";
 import flowerDomeImage from "../assets/flower-dome.JPG";
 import { Link } from "react-router-dom";
