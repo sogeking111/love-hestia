@@ -1,8 +1,8 @@
 import FooterComponent from "../components/footer";
 import HeaderComponent from "../components/header";
-import flowerBouquetImage from "../assets/flower-bouquets.JPG";
-import vaseAndBasketImage from "../assets/vase-and-basket.JPG";
-import flowerDomeImage from "../assets/flower-dome.JPG";
+import flowerBouquetImage from "../assets/flower-bouquets.jpg";
+import vaseAndBasketImage from "../assets/vase-and-basket.jpg";
+import flowerDomeImage from "../assets/flower-dome.jpg";
 import { Link } from "react-router-dom";
 
 const collections = [

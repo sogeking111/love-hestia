@@ -1,4 +1,4 @@
-import ourStoryImage from "../assets/hero-image.JPG";
+import ourStoryImage from "../assets/hero-image.jpg";
 
 function OurStorySectionComponent() {
   return (

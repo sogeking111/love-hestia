@@ -1,4 +1,4 @@
-import customArrangementImage from "../assets/custom-arrangement.JPG";
+import customArrangementImage from "../assets/custom-arrangement.jpg";
 import { Link } from "react-router-dom";
 
 function CustomArrangementSectionComponent() {
