@@ -1,13 +1,11 @@
 import api from "./api";
 import axios from "axios";
 
-const API_HOST = "http://localhost/wordpress/wp-json";
-
 // --- Get JWT Token ---
 async function getToken() {
   try {
     const res = await axios.post(
-      `${API_HOST}/jwt-auth/v1/token`,
+      `${import.meta.env.VITE_API_BASE_URL}/jwt-auth/v1/token`,
       {
         username: "admin",
         password: "admin",
