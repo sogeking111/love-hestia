@@ -1,7 +1,10 @@
 import FooterComponent from "../components/footer";
 import HeaderComponent from "../components/header";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CustomizePage() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <HeaderComponent />
@@ -165,7 +168,10 @@ function CustomizePage() {
 
             {/* CTA */}
             <div className="pt-10 text-center">
-              <button className="border border-[#7c8a6e] px-6 py-2 rounded-full text-sm hover:bg-[#7c8a6e] hover:text-white transition hover:cursor-pointer">
+              <button
+                onClick={() => navigate("/order", { state: {} })}
+                className="border border-[#7c8a6e] px-6 py-2 rounded-full text-sm hover:bg-[#7c8a6e] hover:text-white transition hover:cursor-pointer"
+              >
                 Request custom arrangement
               </button>
             </div>

@@ -1,4 +1,5 @@
 import customArrangementImage from "../assets/custom-arrangement.JPG";
+import { Link } from "react-router-dom";
 
 function CustomArrangementSectionComponent() {
   return (
@@ -20,9 +21,11 @@ function CustomArrangementSectionComponent() {
             flower varieties and arrangement size, depending on stock
             availability.
           </p>
-          <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-emerald-800 transition hover:cursor-pointer">
-            Custom order process
-          </button>
+          <Link to="/customize">
+            <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-emerald-800 transition hover:cursor-pointer">
+              Custom order process
+            </button>
+          </Link>
         </div>
       </div>
     </section>

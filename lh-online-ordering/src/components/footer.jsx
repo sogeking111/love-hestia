@@ -1,9 +1,5 @@
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaPinterestP,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function FooterComponent() {
   return (
@@ -15,29 +11,19 @@ function FooterComponent() {
           <h3 className="font-medium mb-10">Quick links</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/" className="hover:underline">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/shop" className="hover:underline">
                 Shop
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Terms of Service
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Refund policy
-              </a>
+              <Link to="/faq" className="hover:underline">
+                FAQ's
+              </Link>
             </li>
           </ul>
         </div>
@@ -62,9 +48,25 @@ function FooterComponent() {
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col items-center gap-4">
         {/* SOCIAL ICONS */}
         <div className="flex gap-6 text-neutral-600">
-          <FaFacebookF className="cursor-pointer hover:text-black" />
-          <FaTwitter className="cursor-pointer hover:text-black" />
-          <FaInstagram className="cursor-pointer hover:text-black" />
+          <a
+            href="https://www.facebook.com/giftshophestia"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hestia Facebook"
+            className="hover:text-black transition-colors"
+          >
+            <FaFacebookF className="cursor-pointer text-lg" />
+          </a>
+
+          <a
+            href="https://www.instagram.com/lovehestiaflowers"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hestia Instagram"
+            className="hover:text-black transition-colors"
+          >
+            <FaInstagram className="cursor-pointer text-lg" />
+          </a>
         </div>
 
         {/* COPYRIGHT */}

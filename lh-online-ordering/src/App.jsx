@@ -4,7 +4,10 @@ import HomePage from "./pages/home-page";
 import ShopPage from "./pages/shop-page";
 import CustomizePage from "./pages/Customize-page";
 import FaqPage from "./pages/Faq-page";
+import ProductsPage from "./pages/products-page";
+import OrderPage from "./pages/order-page";
 import RootLayout from "./root";
+import WorkshopPage from "./pages/workshop-page";
 
 const router = createBrowserRouter([
   {
@@ -18,16 +21,19 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopPage />,
-        errorElement: <
-        children: [
-          {
-            // to add children
-          }
-        ]
       },
+      {
+        path: "/shop/:id",
+        element: <ProductsPage />,
+      },
+      { path: "/order", element: <OrderPage /> },
       {
         path: "/customize",
         element: <CustomizePage />,
+      },
+      {
+        path: "/workshop",
+        element: <WorkshopPage />,
       },
       {
         path: "/FAQ",

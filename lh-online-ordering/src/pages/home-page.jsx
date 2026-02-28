@@ -5,7 +5,8 @@ import HeroSectionComponent from "../components/hero-section";
 import OurStorySectionComponent from "../components/our-story-section";
 import workshopImage from "../assets/workshop-image.jpg";
 import floristForADay1 from "../assets/florist-for-a-day1.jpg";
-import floristForADay2 from "../assets/florist-for-a-day2.JPG";
+import floristForADay2 from "../assets/florist2-op.JPG";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const floristForADayImages = [
@@ -40,9 +41,11 @@ function HomePage() {
         <div className="relative z-10">
           <p className="text-5xl mb-3">Private Dried Flower Workshop</p>
           <p className="mb-4 text-sm">Birthdays · Bridal Shower · Events</p>
-          <button className="border px-6 py-2 rounded-full text-sm hover:bg-white hover:text-neutral-700 transition hover:cursor-pointer">
-            Learn more
-          </button>
+          <Link to="/workshop">
+            <button className="border px-6 py-2 rounded-full text-sm hover:bg-white hover:text-neutral-700 transition hover:cursor-pointer">
+              Learn more
+            </button>
+          </Link>
         </div>
       </section>
 

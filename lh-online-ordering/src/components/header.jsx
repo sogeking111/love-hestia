@@ -1,5 +1,4 @@
 import NavItemsComponent from "./nav-items";
-import { Search, User, ShoppingBag } from "lucide-react";
 
 function HeaderComponent() {
   return (

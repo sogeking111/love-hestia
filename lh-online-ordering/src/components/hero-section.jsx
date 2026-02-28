@@ -1,4 +1,4 @@
-import heroImage from "../assets/hero-image.jpg";
+import heroImage from "../assets/hero-shot-opt.jpg";
 import NavItemsComponent from "./nav-items";
 
 function HeroSectionComponent() {
@@ -23,9 +23,7 @@ function HeroSectionComponent() {
 
       {/* Overlay content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center text-white px-6">
-        <h1 className="text-4xl md:text-5xl italic mb-2">
-          Love written in flowers
-        </h1>
+        <h1 className="text-4xl md:text-5xl mb-2">Love written in flowers</h1>
         <p className="tracking-wide text-2xl">Flower Studio</p>
       </div>
     </section>

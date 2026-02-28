@@ -1,0 +1,86 @@
+import axios from "axios";
+import api from "./api"; // your configured axios instance
+
+const API_HOST = "http://localhost/wordpress/wp-json";
+
+// --- Get JWT Token ---
+async function getToken() {
+  try {
+    const res = await axios.post(
+      `${API_HOST}/jwt-auth/v1/token`,
+      {
+        username: "admin",
+        password: "admin",
+      },
+      { headers: { "Content-Type": "application/json" } },
+    );
+    return res.data.token;
+  } catch (err) {
+    console.error("JWT Token Error:", err.response?.data || err.message);
+    throw err;
+  }
+}
+
+// --- Upload file to media library ---
+async function uploadFile(file, token) {
+  if (!["image/jpeg", "image/png"].includes(file.type)) {
+    throw new Error(
+      "Only JPEG or PNG images are supported for proof of payment.",
+    );
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("alt_text", file.name);
+
+  const res = await api.post("/media", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data.id; // return attachment ID
+}
+
+// --- Create Customer Order ---
+export const orderService = {
+  async createOrder(orderData) {
+    const token = await getToken();
+
+    let attachmentId = null;
+    if (orderData.proof_of_payment) {
+      attachmentId = await uploadFile(orderData.proof_of_payment, token);
+    }
+
+    const formData = new FormData();
+    formData.append("title", `${orderData.customer_name}`);
+    formData.append("status", "publish");
+
+    formData.append("acf[customer_name]", orderData.customer_name);
+    formData.append("acf[customer_number]", orderData.customer_number);
+    formData.append("acf[receiver_name]", orderData.receiver_name || "");
+    formData.append("acf[receiver_number]", orderData.receiver_number || "");
+    formData.append("acf[delivery_address]", orderData.delivery_address);
+    formData.append(
+      "acf[date_and_time_of_delivery]",
+      orderData.date_and_time_of_delivery,
+    );
+    formData.append("acf[date_time_ordered]", orderData.date_time_ordered);
+    formData.append("acf[product_ordered]", orderData.product_ordered);
+    formData.append("acf[small_card_note]", orderData.small_card_note);
+    formData.append("acf[customize_desc]", orderData.customize_product || "");
+
+    if (attachmentId) {
+      formData.append("acf[proof_of_payment]", attachmentId);
+    }
+
+    const res = await api.post("/customer-order", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data;
+  },
+};
