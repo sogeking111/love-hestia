@@ -25,7 +25,7 @@ export const productService = {
   async getAll() {
     const token = await getToken();
 
-    const res = await api.get("/product", {
+    const res = await api.get("/wp/v2/product", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

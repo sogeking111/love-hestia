@@ -1,13 +1,11 @@
 import axios from "axios";
 import api from "./api"; // your configured axios instance
 
-const API_HOST = "http://localhost/wordpress/wp-json";
-
 // --- Get JWT Token ---
 async function getToken() {
   try {
     const res = await axios.post(
-      `${API_HOST}/jwt-auth/v1/token`,
+      `${import.meta.env.VITE_API_BASE_URL}/jwt-auth/v1/token`,
       {
         username: "admin",
         password: "admin",
@@ -33,7 +31,7 @@ async function uploadFile(file, token) {
   formData.append("file", file);
   formData.append("alt_text", file.name);
 
-  const res = await api.post("/media", formData, {
+  const res = await api.post("/wp/v2/media", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -74,7 +72,7 @@ export const orderService = {
       formData.append("acf[proof_of_payment]", attachmentId);
     }
 
-    const res = await api.post("/customer-order", formData, {
+    const res = await api.post("/wp/v2/customer-order", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
