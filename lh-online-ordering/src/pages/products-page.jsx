@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import HeaderComponent from "../components/header";
 import FooterComponent from "../components/footer";
@@ -23,7 +23,11 @@ function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const effectRan = useRef(false);
+
   useEffect(() => {
+    if (effectRan.current) return;
+
     productService
       .getAll()
       .then((data) => {
@@ -34,6 +38,8 @@ function ProductsPage() {
         console.error("Failed to load products", err);
       })
       .finally(() => setLoading(false));
+
+    effectRan.current = true;
   }, []);
 
   /** ✅ Filter by product-type (taxonomy) */

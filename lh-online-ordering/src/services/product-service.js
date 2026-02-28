@@ -1,4 +1,7 @@
 import api from "./api";
+import axios from "axios";
+
+const API_HOST = "http://localhost/wordpress/wp-json";
 
 // --- Get JWT Token ---
 async function getToken() {
