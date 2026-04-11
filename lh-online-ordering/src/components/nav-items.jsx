@@ -17,11 +17,11 @@ function NavItemsComponent() {
             Shop
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/customize" className={navItemClass}>
             Customize
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/faq" className={navItemClass}>
             FAQ's
