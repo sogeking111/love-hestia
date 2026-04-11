@@ -3,8 +3,7 @@ import { useMemo, useState } from "react";
 import HeaderComponent from "../components/header";
 import FooterComponent from "../components/footer";
 import { orderService } from "../services/order-service";
-
-import qrsample from "../assets/qr sample.png";
+import QrComponent from "../components/qr";
 
 const STANDARD_FEE = 200;
 const SPECIAL_FEE = 250;
@@ -253,16 +252,7 @@ function OrderPage() {
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Payment
             </h3>
-            <div className="mb-4">
-              <img
-                src={qrsample}
-                alt="Payment QR Code"
-                className="w-48 border"
-              />
-              <p className="mt-2 text-sm text-neutral-600">
-                Scan to pay (GCash / Maya)
-              </p>
-            </div>
+            <QrComponent />
 
             <div>
               <input
