@@ -99,8 +99,9 @@ function OrderPage() {
         >
           {/* ORDER FORM */}
           <form
-            className={`space-y-8 ${isSubmitting ? "opacity-70 pointer-events-none" : ""}`}
-            onSubmit={handleSubmit}
+            className={`order-2 md:order-1 space-y-8 ${
+              isSubmitting ? "opacity-70 pointer-events-none" : ""
+            }`}
           >
             {/* Custom Product Field (only if no product) */}
             {!product && (
@@ -291,7 +292,7 @@ function OrderPage() {
 
           {/* Product Preview (only if product exists) */}
           {product && (
-            <div>
+            <div className="order-1 md:order-2">
               <div className="aspect-[3/5] overflow-hidden bg-neutral-200">
                 <img
                   src={imageUrl}
