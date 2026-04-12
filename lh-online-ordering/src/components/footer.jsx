@@ -36,7 +36,7 @@ function FooterComponent() {
           </p>
           <p className="text-sm">
             Please don't hesitate to reach us at Instagram{" "}
-            <span className="font-medium">@_lovehestia</span>.
+            <span className="font-medium">@lovehestiaflowers</span>.
           </p>
         </div>
       </div>
