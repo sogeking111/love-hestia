@@ -102,6 +102,7 @@ function OrderPage() {
             className={`order-2 md:order-1 space-y-8 ${
               isSubmitting ? "opacity-70 pointer-events-none" : ""
             }`}
+            onSubmit={handleSubmit}
           >
             {/* Custom Product Field (only if no product) */}
             {!product && (
