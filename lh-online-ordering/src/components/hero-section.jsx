@@ -1,27 +1,52 @@
+import { useEffect, useRef, useState } from "react";
 import heroImage from "../assets/hero-shot-opt.jpg";
 import NavItemsComponent from "./nav-items";
 
 function HeroSectionComponent() {
-  return (
-    <section className="relative w-screen min-h-screen">
-      {/* HERO IMAGE AS BACKGROUND */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundAttachment: "fixed",
-        }}
-      ></div>
+  const [offsetY, setOffsetY] = useState(0);
+  const ticking = useRef(false);
 
-      {/* Optional overlay to darken image */}
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          setOffsetY(window.scrollY);
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <section className="relative w-full min-h-screen overflow-hidden">
+      {/* PARALLAX IMAGE */}
+      <div
+        className="absolute inset-0"
+        style={{
+          transform: `translateY(${offsetY * 0.4}px)`, // adjust speed here
+        }}
+      >
+        <img
+          src={heroImage}
+          alt="Hero"
+          className="w-full h-[120%] object-cover"
+        />
+      </div>
+
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Navigation links */}
-      <nav className="absolute text-white top-5 left-1/2 transform -translate-x-1/2 w-full flex justify-center py-6 z-20">
+      {/* Navigation */}
+      <nav className="absolute text-white top-5 left-1/2 -translate-x-1/2 w-full flex justify-center py-6 z-20">
         <NavItemsComponent />
       </nav>
 
-      {/* Overlay content */}
+      {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center text-white px-6">
         <h1 className="text-4xl md:text-5xl mb-2">Love written in flowers</h1>
         <p className="tracking-wide text-2xl">Flower Studio</p>
