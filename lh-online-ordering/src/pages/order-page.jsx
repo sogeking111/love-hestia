@@ -47,7 +47,7 @@ function OrderPage() {
 
   const [deliveryArea, setDeliveryArea] = useState("standard");
 
-  const price = product ? Number(product.price || 1500) : 0;
+  const price = product.acf.price;
   const deliveryFee = deliveryArea === "special" ? SPECIAL_FEE : STANDARD_FEE;
   const total = useMemo(() => price + deliveryFee, [price, deliveryFee]);
 
