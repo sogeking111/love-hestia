@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import HeaderComponent from "../components/header";
 import FooterComponent from "../components/footer";
 import { productService } from "../services/product-service";
-import { useNavigate } from "react-router-dom";
 
 const PRODUCT_TYPE_MAP = {
   7: "Flower Dome",
@@ -42,7 +41,7 @@ function ProductsPage() {
     effectRan.current = true;
   }, []);
 
-  /** ✅ Filter by product-type (taxonomy) */
+  /** Filter by product-type */
   const filteredProducts = useMemo(() => {
     return products.filter((item) =>
       item["product-type"]?.includes(productTypeId),
@@ -57,20 +56,25 @@ function ProductsPage() {
     <div>
       <HeaderComponent />
 
-      <section className="bg-neutral-50 py-24">
-        <h2 className="mb-14 text-center text-3xl font-medium text-neutral-800">
+      <section className="bg-neutral-50 py-16">
+        <h2 className="mb-10 text-center text-2xl font-medium text-neutral-800">
           {title}
         </h2>
 
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 sm:grid-cols-2 md:grid-cols-3">
+        {/* ✅ 2 columns on mobile */}
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 sm:grid-cols-2 md:grid-cols-3">
           {filteredProducts.map((item) => {
             const imageUrl =
               item._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
               "/placeholder.jpg";
 
+            /** ✅ Price mapping */
+            const price =
+              item.acf?.price || item.meta?.price || item.price || 0;
+
             return (
               <div key={item.id} className="flex flex-col">
-                {/* Image Tile */}
+                {/* Image */}
                 <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
                   <img
                     src={imageUrl}
@@ -80,10 +84,18 @@ function ProductsPage() {
                 </div>
 
                 {/* Product Info */}
-                <div className="mt-4 flex flex-col items-center text-center">
-                  <h3 className="mb-3 text-sm font-medium tracking-wide text-neutral-800 uppercase">
+                <div className="mt-3 flex flex-col items-center text-center">
+                  <h3 className="mb-1 text-sm font-medium text-neutral-800">
                     {item.title.rendered}
                   </h3>
+
+                  {/* ✅ Price added */}
+                  <p className="mb-3 text-sm text-neutral-600">
+                    ₱
+                    {Number(price).toLocaleString("en-PH", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </p>
 
                   <button
                     type="button"

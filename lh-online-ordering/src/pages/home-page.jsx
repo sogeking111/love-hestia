@@ -51,7 +51,9 @@ function HomePage() {
 
       {/* FLORIST FOR A DAY */}
       <section className="py-20 bg-neutral-50 text-center">
-        <h1 className="mb-4">Florist for a Day</h1>
+        <h1 className="mb-4">
+          Florist <br className="sm:hidden" /> for a Day
+        </h1>
 
         <p className="italic text-lg mb-10 max-w-2xl mx-auto px-10">
           "There's no wrong way to make a bouquet. If it makes you smile, that's

@@ -273,7 +273,7 @@ function OrderPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full flex items-center justify-center gap-3 py-3 uppercase tracking-widest transition hover:cursor-pointer
+              className={`w-full flex items-center justify-center gap-3 py-3 uppercase tracking-widest transition hover:cursor-pointer mb-3
                         ${
                           isSubmitting
                             ? "bg-neutral-400 cursor-not-allowed"
@@ -289,6 +289,9 @@ function OrderPage() {
                 "Place Order"
               )}
             </button>
+            <p className="text-sm text-neutral-600">
+              Note: Kindly inform us once you have placed your order
+            </p>
           </form>
 
           {/* Product Preview (only if product exists) */}
