@@ -5,6 +5,9 @@ import FooterComponent from "../components/footer";
 import { orderService } from "../services/order-service";
 import QrComponent from "../components/qr";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const STANDARD_FEE = 200;
 const SPECIAL_FEE = 250;
 
@@ -28,6 +31,8 @@ function OrderPage() {
   const navigate = useNavigate();
   const product = state?.product || null;
 
+  const [selectedDate, setSelectedDate] = useState(null);
+
   // Form state
   const [form, setForm] = useState({
     customer_name: "",
@@ -38,16 +43,15 @@ function OrderPage() {
     delivery_address: "",
     date_and_time_of_delivery: "",
     product_ordered: product?.title?.rendered || "",
-    customize_product: "", // for custom product orders
+    customize_product: "",
     small_card_note: "",
     proof_of_payment: null,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [deliveryArea, setDeliveryArea] = useState("standard");
 
-  const price = product.acf.price;
+  const price = product?.acf?.price || 0;
   const deliveryFee = deliveryArea === "special" ? SPECIAL_FEE : STANDARD_FEE;
   const total = useMemo(() => price + deliveryFee, [price, deliveryFee]);
 
@@ -63,7 +67,7 @@ function OrderPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isSubmitting) return; // extra safety
+    if (isSubmitting) return;
 
     setIsSubmitting(true);
 
@@ -81,8 +85,24 @@ function OrderPage() {
     } catch (err) {
       console.error(err);
       alert("Failed to place order: " + err.message);
-      setIsSubmitting(false); // re-enable if failed
+      setIsSubmitting(false);
     }
+  };
+
+  const getAllowedTimes = (date) => {
+    if (!date) return [];
+
+    const times = [];
+
+    for (let hour = 9; hour < 18; hour++) {
+      for (let min of [0, 30]) {
+        const time = new Date(date);
+        time.setHours(hour, min, 0, 0);
+        times.push(time);
+      }
+    }
+
+    return times;
   };
 
   return (
@@ -104,7 +124,6 @@ function OrderPage() {
             }`}
             onSubmit={handleSubmit}
           >
-            {/* Custom Product Field (only if no product) */}
             {!product && (
               <div>
                 <h3 className="mb-4 font-medium uppercase tracking-wide">
@@ -122,7 +141,6 @@ function OrderPage() {
               </div>
             )}
 
-            {/* Customer Info */}
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Your Information
             </h3>
@@ -154,7 +172,6 @@ function OrderPage() {
               className="w-full border p-3 mb-3"
             />
 
-            {/* Receiver Info */}
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Receiver's Information (optional)
             </h3>
@@ -175,18 +192,31 @@ function OrderPage() {
               className="w-full border p-3 mb-3"
             />
 
-            {/* Delivery Details */}
+            {/* DELIVERY DETAILS */}
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Delivery Details
             </h3>
-            <input
-              required
-              name="date_and_time_of_delivery"
-              value={form.date_and_time_of_delivery}
-              onChange={handleChange}
-              type="datetime-local"
+
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => {
+                setSelectedDate(date);
+                setForm((prev) => ({
+                  ...prev,
+                  date_and_time_of_delivery: date?.toISOString(),
+                }));
+              }}
+              showTimeSelect
+              includeTimes={getAllowedTimes(selectedDate)}
+              timeFormat="h:mm aa"
+              dateFormat="MMMM d, yyyy h:mm aa"
+              placeholderText="Select delivery date & time"
               className="w-full border p-3 mb-3"
+              required
+              minDate={new Date()}
+              withPortal // ✅ THIS FIXES OVERFLOW ISSUES
             />
+
             <textarea
               required
               name="delivery_address"
@@ -196,6 +226,7 @@ function OrderPage() {
               rows="3"
               className="w-full border p-3 mb-3"
             />
+
             <textarea
               name="small_card_note"
               value={form.small_card_note}
@@ -205,14 +236,12 @@ function OrderPage() {
               className="w-full border p-3 mb-3"
             />
 
-            {/* Delivery Area */}
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Delivery Area
             </h3>
             <label className="flex items-center gap-3 mb-2">
               <input
                 type="radio"
-                name="delivery"
                 checked={deliveryArea === "standard"}
                 onChange={() => setDeliveryArea("standard")}
                 required
@@ -222,14 +251,12 @@ function OrderPage() {
             <label className="flex items-center gap-3">
               <input
                 type="radio"
-                name="delivery"
                 checked={deliveryArea === "special"}
                 onChange={() => setDeliveryArea("special")}
               />
               Minglanilla / Liloan / Lapu-Lapu (₱250)
             </label>
 
-            {/* Total */}
             <div className="border-t pt-6 space-y-2">
               {product && (
                 <>
@@ -249,7 +276,6 @@ function OrderPage() {
               )}
             </div>
 
-            {/* Payment */}
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Payment
             </h3>
@@ -272,12 +298,11 @@ function OrderPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full flex items-center justify-center gap-3 py-3 uppercase tracking-widest transition hover:cursor-pointer mb-3
-                        ${
-                          isSubmitting
-                            ? "bg-neutral-400 cursor-not-allowed"
-                            : "bg-neutral-800 hover:bg-neutral-700 text-white"
-                        }`}
+              className={`w-full flex items-center justify-center gap-3 py-3 uppercase tracking-widest transition mb-3 ${
+                isSubmitting
+                  ? "bg-neutral-400 cursor-not-allowed"
+                  : "bg-neutral-800 hover:bg-neutral-700 text-white"
+              }`}
             >
               {isSubmitting ? (
                 <>
@@ -288,12 +313,13 @@ function OrderPage() {
                 "Place Order"
               )}
             </button>
+
             <p className="text-sm text-neutral-600">
               Note: Kindly inform us once you have placed your order
             </p>
           </form>
 
-          {/* Product Preview (only if product exists) */}
+          {/* PRODUCT PREVIEW */}
           {product && (
             <div className="order-1 md:order-2">
               <div className="aspect-[3/5] overflow-hidden bg-neutral-200">
