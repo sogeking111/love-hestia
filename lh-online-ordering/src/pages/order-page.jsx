@@ -287,14 +287,19 @@ function OrderPage() {
 
             <QrComponent />
 
-            <input
-              required
-              name="proof_of_payment"
-              type="file"
-              accept="image/jpeg,image/png"
-              onChange={handleChange}
-              className="w-full border p-3"
-            />
+            <div>
+              <input
+                required
+                name="proof_of_payment"
+                type="file"
+                accept="image/jpeg,image/png"
+                onChange={handleChange}
+                className="w-full border p-3 hover:cursor-pointer"
+              />
+              <p className="mt-2 text-sm text-neutral-600">
+                Upload proof of payment*
+              </p>
+            </div>
 
             <button
               type="submit"
@@ -302,11 +307,22 @@ function OrderPage() {
               className={`w-full flex items-center justify-center gap-3 py-3 uppercase tracking-widest transition mb-3 ${
                 isSubmitting
                   ? "bg-neutral-400 cursor-not-allowed"
-                  : "bg-neutral-800 hover:bg-neutral-700 text-white"
+                  : "bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-white"
               }`}
             >
-              {isSubmitting ? "Processing…" : "Place Order"}
+              {isSubmitting ? (
+                <>
+                  <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  Processing…
+                </>
+              ) : (
+                "Place Order"
+              )}
             </button>
+
+            <p className="text-sm text-neutral-600">
+              Note: Kindly inform us once you have placed your order
+            </p>
           </form>
 
           {/* PRODUCT PREVIEW */}
