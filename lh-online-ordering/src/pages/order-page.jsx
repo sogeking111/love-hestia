@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, forwardRef } from "react";
 import HeaderComponent from "../components/header";
 import FooterComponent from "../components/footer";
 import { orderService } from "../services/order-service";
@@ -26,14 +26,30 @@ function formatDateTime(dateString) {
   return date.toLocaleString("en-US", options);
 }
 
+const DateButtonInput = forwardRef(({ value, onClick }, ref) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      ref={ref}
+      className="w-full border p-3 text-left bg-white hover:bg-neutral-50 transition cursor-pointer -mb-4"
+    >
+      {value || "Select delivery date & time"}
+    </button>
+  );
+});
+
+DateButtonInput.displayName = "DateButtonInput";
+
 function OrderPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const product = state?.product || null;
 
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deliveryArea, setDeliveryArea] = useState("standard");
 
-  // Form state
   const [form, setForm] = useState({
     customer_name: "",
     customer_number: "",
@@ -47,9 +63,6 @@ function OrderPage() {
     small_card_note: "",
     proof_of_payment: null,
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [deliveryArea, setDeliveryArea] = useState("standard");
 
   const price = product?.acf?.price || 0;
   const deliveryFee = deliveryArea === "special" ? SPECIAL_FEE : STANDARD_FEE;
@@ -87,22 +100,6 @@ function OrderPage() {
       alert("Failed to place order: " + err.message);
       setIsSubmitting(false);
     }
-  };
-
-  const getAllowedTimes = (date) => {
-    if (!date) return [];
-
-    const times = [];
-
-    for (let hour = 9; hour < 18; hour++) {
-      for (let min of [0, 30]) {
-        const time = new Date(date);
-        time.setHours(hour, min, 0, 0);
-        times.push(time);
-      }
-    }
-
-    return times;
   };
 
   return (
@@ -144,6 +141,7 @@ function OrderPage() {
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Your Information
             </h3>
+
             <input
               required
               name="customer_name"
@@ -153,6 +151,7 @@ function OrderPage() {
               placeholder="Name*"
               className="w-full border p-3 mb-3"
             />
+
             <input
               required
               name="customer_number"
@@ -162,6 +161,7 @@ function OrderPage() {
               placeholder="Number*"
               className="w-full border p-3 mb-3"
             />
+
             <input
               required
               name="facebook_name"
@@ -175,6 +175,7 @@ function OrderPage() {
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Receiver's Information (optional)
             </h3>
+
             <input
               name="receiver_name"
               value={form.receiver_name}
@@ -183,6 +184,7 @@ function OrderPage() {
               placeholder="Receiver's name"
               className="w-full border p-3 mb-3"
             />
+
             <input
               name="receiver_number"
               value={form.receiver_number}
@@ -207,14 +209,15 @@ function OrderPage() {
                 }));
               }}
               showTimeSelect
-              includeTimes={getAllowedTimes(selectedDate)}
               timeFormat="h:mm aa"
               dateFormat="MMMM d, yyyy h:mm aa"
-              placeholderText="Select delivery date & time"
-              className="w-full border p-3 mb-3"
-              required
               minDate={new Date()}
-              withPortal // ✅ THIS FIXES OVERFLOW ISSUES
+              withPortal
+              customInput={<DateButtonInput />}
+              filterTime={(time) => {
+                const hours = new Date(time).getHours();
+                return hours >= 9 && hours <= 18; // ✅ 9AM–6PM only
+              }}
             />
 
             <textarea
@@ -239,6 +242,7 @@ function OrderPage() {
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Delivery Area
             </h3>
+
             <label className="flex items-center gap-3 mb-2">
               <input
                 type="radio"
@@ -248,6 +252,7 @@ function OrderPage() {
               />
               Standard Delivery (₱200)
             </label>
+
             <label className="flex items-center gap-3">
               <input
                 type="radio"
@@ -279,21 +284,17 @@ function OrderPage() {
             <h3 className="mb-4 font-medium uppercase tracking-wide">
               Payment
             </h3>
+
             <QrComponent />
 
-            <div>
-              <input
-                required
-                name="proof_of_payment"
-                type="file"
-                accept="image/jpeg,image/png"
-                onChange={handleChange}
-                className="w-full border p-3"
-              />
-              <p className="mt-2 text-sm text-neutral-600">
-                Upload proof of payment*
-              </p>
-            </div>
+            <input
+              required
+              name="proof_of_payment"
+              type="file"
+              accept="image/jpeg,image/png"
+              onChange={handleChange}
+              className="w-full border p-3"
+            />
 
             <button
               type="submit"
@@ -304,19 +305,8 @@ function OrderPage() {
                   : "bg-neutral-800 hover:bg-neutral-700 text-white"
               }`}
             >
-              {isSubmitting ? (
-                <>
-                  <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  Processing…
-                </>
-              ) : (
-                "Place Order"
-              )}
+              {isSubmitting ? "Processing…" : "Place Order"}
             </button>
-
-            <p className="text-sm text-neutral-600">
-              Note: Kindly inform us once you have placed your order
-            </p>
           </form>
 
           {/* PRODUCT PREVIEW */}

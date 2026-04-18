@@ -40,20 +40,6 @@ function FaqPage() {
 
             <div>
               <h3 className="font-semibold mb-2">
-                Is it possible to book our own delivery rider?
-              </h3>
-              <p className="mb-2">
-                Yes, it’s possible! After checking out your order, you can
-                select this option, and the pinned location via Maxim will be
-                provided. This is only applicable for Cebu orders eligible for
-                Lalamove and Maxim delivery. If you choose this option, please
-                let us know via Instagram or Facebook so we can provide you with
-                instructions.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">
                 Where is your store located?
               </h3>
               <p className="mb-2">
