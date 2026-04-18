@@ -13,7 +13,7 @@ function CustomArrangementSectionComponent() {
           />
         </div>
         <div>
-          <h2>Custom Arrangements</h2>
+          <h2 className="text-[36px] mb-5">Custom Arrangements</h2>
           <p className="text-sm leading-relaxed mb-6">
             We'd love to create a personalized dried-flower arrangement just for
             you. Each design is unique and crafted based on your chosen color

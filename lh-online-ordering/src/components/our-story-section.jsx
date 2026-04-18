@@ -5,7 +5,7 @@ function OurStorySectionComponent() {
     <section className="py-30 bg-neutral-50">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 px-6 items-center">
         <div>
-          <h2>Our Story</h2>
+          <h2 className="text-[36px] mb-5">Our Story</h2>
           <p className="text-sm leading-relaxed">
             Love Hestia began in 2022, born from healing, hope, and a renewed
             sense of purpose. Like many, the journey was shaped by the
