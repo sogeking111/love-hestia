@@ -76,21 +76,6 @@ function OrderPage() {
         date_time_ordered: formatDateTime(new Date().toISOString()),
       });
 
-      // WEBHOOK HERE
-      await fetch("http://localhost/wordpress/wp-json/aiwu/v1/webhook/7_1/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customer_name: form.customer_name,
-          customer_number: form.customer_number,
-          delivery_address: form.delivery_address,
-          total: total,
-          product: form.product_ordered || form.customize_product,
-        }),
-      });
-
       alert("Order placed successfully!");
       navigate("/shop");
     } catch (err) {
