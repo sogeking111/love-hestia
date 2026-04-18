@@ -197,11 +197,10 @@ function OrderPage() {
               className="w-full border p-3 mb-3"
             />
             <textarea
-              required
               name="small_card_note"
               value={form.small_card_note}
               onChange={handleChange}
-              placeholder="Small card note*"
+              placeholder="Small card note"
               rows="2"
               className="w-full border p-3 mb-3"
             />

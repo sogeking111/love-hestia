@@ -24,12 +24,12 @@ function CollectionsSectionComponent() {
   ];
 
   return (
-    <section className="bg-neutral-50 py-24 text-center">
-      <h2 className="mb-14 text-3xl font-medium text-neutral-800">
+    <section className="bg-neutral-50 py-20 text-center">
+      <h2 className="mb-14 md:text-[36px] text-3xl font-medium text-neutral-800">
         Our Collections
       </h2>
 
-      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-24 px-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-15 px-6 md:grid-cols-3">
         {collections.map((item) => (
           <Link to={`/shop/${item.productKey}`}>
             <div
@@ -37,7 +37,7 @@ function CollectionsSectionComponent() {
               className="group flex cursor-pointer flex-col items-center"
             >
               {/* Image wrapper */}
-              <div className="relative mb-6 h-86 w-70 overflow-hidden">
+              <div className="relative mb-6 md:h-86 md:w-70 h-66 w-50 overflow-hidden">
                 {/* Image */}
                 <img
                   src={item.image}

@@ -39,7 +39,9 @@ function HomePage() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
         <div className="relative z-10">
-          <p className="text-5xl mb-3">Private Dried Flower Workshop</p>
+          <h1 className="text-5xl mb-3">
+            Private Dried <br className="sm:hidden" /> Flower Workshop
+          </h1>
           <p className="mb-4 text-sm">Birthdays · Bridal Shower · Events</p>
           <Link to="/workshop">
             <button className="border px-6 py-2 rounded-full text-sm hover:bg-white hover:text-neutral-700 transition hover:cursor-pointer">
@@ -50,12 +52,12 @@ function HomePage() {
       </section>
 
       {/* FLORIST FOR A DAY */}
-      <section className="py-20 bg-neutral-50 text-center">
-        <h1 className="mb-4">
+      <section className="py-10 bg-neutral-50 text-center">
+        <h1 className="text-[64px] md:text-[80px] mb-4">
           Florist <br className="sm:hidden" /> for a Day
         </h1>
 
-        <p className="italic text-lg mb-10 max-w-2xl mx-auto px-10">
+        <p className="italic text-base md:text-lg mb-10 max-w-2xl mx-auto px-10">
           "There's no wrong way to make a bouquet. If it makes you smile, that's
           all the magic you need."
         </p>

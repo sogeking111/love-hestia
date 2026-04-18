@@ -21,7 +21,6 @@ function FaqPage() {
                 and enter your delivery address, the <b>shipping fee</b> will
                 appear automatically.
               </p>
-              <p className="underline">Enjoy FREE DELIVERY on orders ₱3,500+</p>
             </div>
 
             <div>
@@ -64,29 +63,6 @@ function FaqPage() {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">Can we pick up the order?</h3>
-              <p className="mb-2">
-                Pick-up is available along Osmeña Blvd., Cebu City. We’ll
-                provide the exact pinned location on the day of pickup.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">
-                What are the delivery and pick-up hours?
-              </h3>
-              <p className="mb-2">
-                For same-day deliveries or pick-ups, we can accommodate you
-                between 8:00 AM and 5:00 PM
-              </p>
-              <p className="mb-2">
-                For orders outside Cebu, we ship through J&T on the same day or
-                the following day. We’ll notify you as soon as the waybill is
-                available
-              </p>
-            </div>
-
-            <div>
               <h3 className="font-semibold mb-2">Are they real flowers?</h3>
               <p className="mb-2">
                 Yes, we sell preserved and naturally dried flowers, and they can
@@ -123,30 +99,6 @@ function FaqPage() {
               <p className="mb-2">
                 For now we only offer dried flower arrangements
               </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">What’s you order process?</h3>
-              <ul className="list-disc list-inside space-y-1">
-                <li>
-                  Browse our available products and select the item you’d like
-                  to order.
-                </li>
-                <li>
-                  Proceed to checkout and fill in the necessary delivery
-                  details.
-                </li>
-                <li>Payment is required to confirm your order.</li>
-                <li>
-                  After completing the payment, send us a message with your
-                  proof of payment. (no proof of payment, no reservation)
-                </li>
-                <li>We will then send you a photo of your order.</li>
-                <li>
-                  Once your order is out for delivery, we will provide the
-                  delivery link or waybill.
-                </li>
-              </ul>
             </div>
 
             <div>

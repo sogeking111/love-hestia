@@ -48,8 +48,10 @@ function HeroSectionComponent() {
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center text-white px-6">
-        <h1 className="text-4xl md:text-5xl mb-2">Love written in flowers</h1>
-        <p className="tracking-wide text-2xl">Flower Studio</p>
+        <h1 className="text-[64px] md:text-[80px] leading-[1.1] mb-2">
+          Love written in flowers
+        </h1>
+        <p className="tracking-wide text-lg md:text-2xl">Flower Studio</p>
       </div>
     </section>
   );

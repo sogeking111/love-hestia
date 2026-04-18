@@ -53,7 +53,6 @@ function WorkshopPage() {
 
           <div className="space-y-6 text-sm leading-relaxed">
             <div>
-              <h3 className="font-semibold mb-2">BOOKING PROCESS</h3>
               <h3 className="font-semibold mb-2">Pricing</h3>
               <p className="mb-2">
                 The workshop rate depends on your chosen inspiration

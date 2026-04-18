@@ -31,12 +31,12 @@ function FooterComponent() {
         {/* CONTACT */}
         <div>
           <h3 className="font-medium mb-10">Contact Us</h3>
+          <p className="text-sm mb-4">lovehestiashop@gmail.com</p>
           <p className="text-sm mb-4">
-            Need something else? We're here for you!
+            Instagram: <span className="font-medium">@lovehestiaflowers</span>.
           </p>
           <p className="text-sm">
-            Please don't hesitate to reach us at Instagram{" "}
-            <span className="font-medium">@lovehestiaflowers</span>.
+            <span className="font-medium">+63961 712 9672</span>.
           </p>
         </div>
       </div>
