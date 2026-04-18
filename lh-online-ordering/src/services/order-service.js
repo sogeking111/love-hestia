@@ -42,6 +42,7 @@ async function uploadFile(file, token) {
 
 async function sendWebhook(orderData) {
   try {
+    console.log("Triggering webhook");
     await api.post(
       "/aiwu/v1/webhook/7_1/",
       {
