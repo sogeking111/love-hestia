@@ -1,3 +1,10 @@
 {
+  "redirects": [
+    {
+      "source": "https://lovehestia.shop/:path*",
+      "destination": "https://www.lovehestia.shop/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "./api"; // your configured axios instance
+import api from "./api";
 
 // --- Get JWT Token ---
 async function getToken() {
@@ -37,7 +37,29 @@ async function uploadFile(file, token) {
     },
   });
 
-  return res.data.id; // return attachment ID
+  return res.data.id;
+}
+
+async function sendWebhook(orderData) {
+  try {
+    await api.post(
+      "/aiwu/v1/webhook/7_1/",
+      {
+        customer_name: orderData.customer_name,
+        customer_number: orderData.customer_number,
+        delivery_address: orderData.delivery_address,
+        product: orderData.product_ordered || orderData.customize_product,
+        total: orderData.total,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  } catch (err) {
+    console.error("Webhook failed:", err.response?.data || err.message);
+  }
 }
 
 // --- Create Customer Order ---
@@ -72,10 +94,17 @@ export const orderService = {
       formData.append("acf[proof_of_payment]", attachmentId);
     }
 
+    // ✅ CREATE ORDER (CRITICAL)
     const res = await api.post("/wp/v2/customer-order", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+    });
+
+    // ✅ FIRE WEBHOOK (NON-BLOCKING)
+    sendWebhook({
+      ...orderData,
+      total: orderData.total,
     });
 
     return res.data;
