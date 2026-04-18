@@ -40,24 +40,14 @@ async function uploadFile(file, token) {
   return res.data.id;
 }
 
-async function sendWebhook(orderData) {
+async function sendWebhook() {
   try {
     console.log("Triggering webhook");
-    await api.post(
-      "/aiwu/v1/webhook/7_1/",
-      {
-        customer_name: orderData.customer_name,
-        customer_number: orderData.customer_number,
-        delivery_address: orderData.delivery_address,
-        product: orderData.product_ordered || orderData.customize_product,
-        total: orderData.total,
+    await api.post("/aiwu/v1/webhook/12_1/", {
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    });
   } catch (err) {
     console.error("Webhook failed:", err.response?.data || err.message);
   }
@@ -103,10 +93,7 @@ export const orderService = {
     });
 
     // ✅ FIRE WEBHOOK (NON-BLOCKING)
-    sendWebhook({
-      ...orderData,
-      total: orderData.total,
-    });
+    sendWebhook();
 
     return res.data;
   },
