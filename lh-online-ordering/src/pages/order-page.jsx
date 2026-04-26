@@ -91,6 +91,7 @@ function OrderPage() {
           form.date_and_time_of_delivery,
         ),
         date_time_ordered: formatDateTime(new Date().toISOString()),
+        product_image: product.featured_media,
       });
 
       alert("Order placed successfully!");
