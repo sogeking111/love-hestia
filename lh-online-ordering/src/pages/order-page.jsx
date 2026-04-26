@@ -338,6 +338,8 @@ function OrderPage() {
               <h2 className="mt-6 text-lg font-medium uppercase tracking-wide text-neutral-800">
                 {product.title.rendered}
               </h2>
+
+              <p>{product.acf.product_description}</p>
             </div>
           )}
         </div>
